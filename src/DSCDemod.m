@@ -17,8 +17,8 @@ inputDSC = [120, 0, 23, 20, 0, 10, 100, 0, 50, 30, 0, 10, 109, 126, 8, 29, 10, 8
 y = y(1:end);
 
 Nsamps = length(y); 
-%t = (1/fS)*(1:Nsamps);          %Prepare time data for plot 
-t=1:Nsamps;
+t = (1/fS)*(1:Nsamps);          %Prepare time data for plot
+%t=1:Nsamps;
 
 yRef = y;
 y = awgn (y, -3);
