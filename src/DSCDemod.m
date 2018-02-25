@@ -41,16 +41,25 @@ d = (sign (dRaw)(shiftSymClock:end).+1)./2;
 dUp = [zeros(shiftSymClock-1,1); d];
 dUp = upsample (dUp-0.5, fS/fD, fS/fD-shiftBitClock)(1:length(t));
 
+
+symClock = zeros (length(d), 1);
+symClock(1:10:end) = 1;
+
+symClockUp = [zeros(shiftSymClock-1,1); symClock];
+symClockUp = upsample (symClockUp, fS/fD, fS/fD-shiftBitClock)(1:length(t));
+
 dSamp = dRaw(shiftSymClock:end);
 
 
 figure
-plot (t, [sign(YRef-BRef)*0.3+0.1, YRef-BRef], '--', 
-      t, [sign(Y-B)*0.3, Y-B], '-',
-      %t, (1-sign(p))*0.2, 'k:',
+plot (t, [YRef-BRef, sign(YRef-BRef)*0.35], '--',
+      t, [Y-B, sign(Y-B)*0.3], '-',
+      t, [Y, -B], '-.',
       t, dRawUp,
-      t, dUp);
-legend ('ref det', 'ref demod', 'det', 'demod', 'sampled bits', 'sampled symb');
+      t, dUp,
+      t, symClockUp*0.4, 'k');
+legend ('ref demod', 'ref det', 'demod (=Y-B)', 'det', ...
+  'Y', 'B', 'sampled bits', 'sampled symb', 'symb clock');
 grid minor
 
 
