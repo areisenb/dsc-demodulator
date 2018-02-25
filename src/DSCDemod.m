@@ -3,7 +3,7 @@ clear
 pkg load communications
 
 % constants
-file = '../samples/trimmed_mf_DSC.wav'; 
+file = '../testdata/trimmed_mf_DSC.wav';
 f0 = 1700;
 fT = 85;
 fD = 100; ## 100 Baud
